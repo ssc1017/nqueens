@@ -1,10 +1,8 @@
-class NQueensSolution {
+public class NQueensSolution {
 
-    public static final int N = 8;
-
-    private int j; // current j, j >= 0 && j <= N + 1
+    private int j; // current col, j >= 0 && j <= N + 1
     
-    private int i; // current i
+    private int i; // current row
 
     private int[] x; // record i in column j so we can continue our search on row after regression, x[1 : 8] >= 0 && x[1 : 8] <= N
 
@@ -15,6 +13,8 @@ class NQueensSolution {
     private boolean[] c; // record diagnals
 
     private boolean safe; // check if the position safe or not
+
+    public static final int N = 8;
 
     private void initBoard() {
         for (int m = 1; m <= N; m++) {
@@ -72,6 +72,18 @@ class NQueensSolution {
         a[i] = b[i + j] = c[i - j + N] = true;
     }
 
+    private void printSolution() {
+        for (int m = 1; m <= N; m++) {
+            for (int n = 1; n < N; n++) {
+                if (x[m] == n) System.out.printf("● ");
+                else System.out.printf("◎ ");
+            }
+            if (x[m] == N) System.out.printf("●\n");
+            else System.out.printf("◎\n");
+        }
+        System.out.printf("\n");
+    }
+
     private void regress() {
         reconsiderPriorColumn();
         if (!regressOutOfFirstCol()) {
@@ -104,23 +116,12 @@ class NQueensSolution {
                 }
             }
             if (j > N) {
-                System.out.println(++cnt);
+                System.out.printf("Solution %d:\n", ++cnt);
                 printSolution();
                 regress();
             }
             else break;
         }
-    }
-
-    public void printSolution() {
-        for (int m = 1; m <= N; m++) {
-            for (int n = 1; n <= N; n++) {
-                if (x[m] == n) System.out.printf("● ");
-                else System.out.printf("◎ ");
-            }
-            System.out.printf("\n");
-        }
-        System.out.printf("\n");
     }
     
     public NQueensSolution() {
