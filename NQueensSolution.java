@@ -12,19 +12,9 @@ public class NQueensSolution {
 
     private boolean[] c; // record diagnals
 
-    private boolean safe; // check if the position safe or not
+    private boolean safe; // check if the position is safe or not
 
     public static final int N = 8;
-
-    private void initBoard() {
-        for (int m = 1; m <= N; m++) {
-            a[m] = true;
-        }
-        for (int m = 1; m <= 2 * N; m++) {
-            b[m] = true;
-            c[m] = true;
-        }
-    }
 
     private void considerFirstColumn() {
         j = 1;
@@ -98,7 +88,6 @@ public class NQueensSolution {
     }
 
     public void solve() {
-        initBoard();
         considerFirstColumn();
         int cnt = 0;
         while (true)
@@ -129,6 +118,13 @@ public class NQueensSolution {
         a = new boolean[N + 1];
         b = new boolean[2 * N + 1];
         c = new boolean[2 * N + 1];
+        for (int m = 1; m <= N; m++) {
+            a[m] = true;
+        }
+        for (int m = 1; m <= 2 * N; m++) {
+            b[m] = true;
+            c[m] = true;
+        }
         safe = false;
     }
 
